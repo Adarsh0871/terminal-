@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.datica</groupId>
-	<artifactId>simple-war</artifactId>
-	<packaging>war</packaging>
-	<version>0.1</version>
-	<name>A simple WAR file</name>
+    <modelVersion>4.0.0</modelVersion>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <!-- Group and Artifact Info -->
+    <groupId>com.datica</groupId>
+    <artifactId>java-war-deploy-example</artifactId>
+    <packaging>war</packaging>
+    <version>0.1-SNAPSHOT</version>
+    <name>Demo for deploying WAR files</name>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<showDeprecation>true</showDeprecation>
-						<showWarnings>true</showWarnings>
-						<source>1.8</source>
-						<target>1.8</target>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+    <!-- Project Properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <finalName>java-war-deploy-example</finalName>
+
+        <plugins>
+            <!-- Maven Resources Plugin to Copy web.xml to the correct location -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>web.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>src/main/webapp/WEB-INF</outputDirectory> <!-- Define the output location -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven WAR Plugin to Package the WAR File -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <webxml>src/main/webapp/WEB-INF/web.xml</webxml> <!-- Reference the web.xml file -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
