@@ -53,6 +53,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
+                    <!-- WebXML location is assumed to be default in WEB-INF -->
                     <webxml>src/main/webapp/WEB-INF/web.xml</webxml> <!-- Reference the web.xml file -->
                 </configuration>
             </plugin>
