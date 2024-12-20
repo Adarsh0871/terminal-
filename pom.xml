@@ -4,10 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.datica</groupId>
     <artifactId>java-war-deploy-example</artifactId>
-    <packaging>war</packaging>
     <version>0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+
     <name>Demo for deploying WAR files</name>
 
     <properties>
@@ -18,39 +20,13 @@
         <finalName>java-war-deploy-example</finalName>
 
         <plugins>
-            <!-- Maven Resources Plugin to Copy web.xml to the correct location -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/resources</directory>
-                                    <includes>
-                                        <include>web.xml</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                            <outputDirectory>src/main/webapp/WEB-INF</outputDirectory> <!-- Define the output location -->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Maven WAR Plugin to Package the WAR File -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
-                    <webxml>src/main/webapp/WEB-INF/web.xml</webxml> <!-- Reference the web.xml file -->
+                    <!-- No webxml is required if you are using annotations -->
+                    <!-- No need to specify anything for webxml here -->
                 </configuration>
             </plugin>
         </plugins>
