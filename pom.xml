@@ -18,7 +18,7 @@
         <finalName>java-war-deploy-example</finalName>
 
         <plugins>
-            <!-- Resources Plugin to copy web.xml if it doesn't exist -->
+            <!-- Maven Resources Plugin to Copy web.xml to the correct location -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -38,19 +38,19 @@
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>src/main/webapp/WEB-INF</outputDirectory>
+                            <outputDirectory>src/main/webapp/WEB-INF</outputDirectory> <!-- Define the output location -->
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- Maven WAR Plugin -->
+            <!-- Maven WAR Plugin to Package the WAR File -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
-                    <webxml>src/main/webapp/WEB-INF/web.xml</webxml>
+                    <webxml>src/main/webapp/WEB-INF/web.xml</webxml> <!-- Reference the web.xml file -->
                 </configuration>
             </plugin>
         </plugins>
